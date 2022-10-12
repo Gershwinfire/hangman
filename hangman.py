@@ -127,10 +127,11 @@ class UnusedLetters:
         self.populate_board_letters()
     
     def populate_board_letters(self):
-        self.board_letters = []
-        
+
+        if len(self.board_letters) > 0:
+            self.board_letters = []
+
         for letter in Letters:
-            print(self.live_letters)
             if letter in self.live_letters:
                 self.board_letters.append(letter.unused)
             elif letter in self.dead_letters:
@@ -192,7 +193,13 @@ class Board:
             if len(letter) == 1:
                 break
             print("Please Only Choose One Letter at a Time")
-        if self.convert_input(letter) not in self.game_letters.dead_letters:
+        letter = letter.strip()
+        return letter
+
+
+    def compare_letter(self, letter):
+
+        if self.convert_input(letter) in self.game_letters.live_letters:
             if letter in self.gameword.word:
                 print("Found letter")
                 self.game_letters.live_to_dead(letter)
@@ -207,22 +214,3 @@ class Board:
                 print("Somehow Letter not Found Anywhere")
         else:
             print(f"{letter} was already Guessed. Please Pick a different Letter.")
-
-
-
-
-
-
-         
-
-
-
-'''
-
-A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
-
-A̶ ̶B̶ ̶C̶ ̶D̶ ̶E̶ ̶F̶ ̶G̶ ̶H̶ ̶I̶ ̶J̶ ̶K̶ ̶L̶ ̶M̶ ̶N̶ ̶O̶ ̶P̶ ̶Q̶ ̶R̶ ̶S̶ ̶T̶ ̶U̶ ̶V̶ ̶W̶ ̶X̶ ̶Y̶ ̶Z̶
-
-🄰 🄱 🄲 🄳 🄴 🄵 🄶 🄷 🄸 🄹 🄺 🄻 🄼 🄽 🄾 🄿 🅀 🅁 🅂 🅃 🅄 🅅 🅆 🅇 🅈 🅉
-a b c d e f g h i j k l m n o p q r s t u v w x y z 
-'''
